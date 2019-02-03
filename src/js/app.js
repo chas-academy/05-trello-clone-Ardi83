@@ -68,7 +68,7 @@ const jtrello = (function() {
     createdList.find('.list-header > span').text(titleListName);
     createdList.find('.list-header > button.delete').on('click', deleteList);
     createdList.find('form.new-card').on('submit', createCard);
-    createdList.find('.delete-card').on('click', deleteCard);
+    createdList.find('.card').remove();
     
     createdList.insertAfter(DOM.$board.find('.column').last().prev());
     
@@ -94,19 +94,21 @@ const jtrello = (function() {
   function listCount () {
     return $('.column').find('ul.list-cards').children('li.card').length;
   }
-    let newCard = $(this).closest('ul.list-cards').find('li.card').clone().last();
-    newCard.show();
+  
+  let cardsName = $(this).find('input[name="title"]').val();
+  let newCard = $(`<ul class="list-cards">
+  <li class="card"> <span class="number"> No. ${listCount()} - ${cardsName} </span>
+  <button class="button delete-card">X</button>
+  </li></ul>`);
+  
 
-    let cardsName = $(this).find('input[name="title"]').val();
-    newCard.find('span.number').text(`No. ${listCount()} - ${cardsName}`);
-    
     newCard.find('.delete-card').on('click', deleteCard);
-
-    newCard.insertAfter($(this).closest('ul.list-cards').find('li.card').last());
+    // newCard.find('.button.delete').on('click', deleteCard);
+    newCard.appendTo($(this).closest('.list-cards'));
   }
 
   function deleteCard() {
-    $(this).closest('.card').remove();
+    $(this).closest('.card').hide().fadeIn(1).fadeOut(1000).remove();
     console.log("This should delete the card you clicked on");
   }
 
