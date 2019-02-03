@@ -11,13 +11,17 @@
         <div class="column">
             <div class="list">
                 <div class="list-header">
-                    Todo
+                    <span>
+                        Todo
+                    </span>
                     <button class="button delete">X</button>
                 </div>
                 <ul class="list-cards">
                     <li class="card">
-                        Card #1
-                        <button class="button delete">X</button>
+                        <span class="number">
+                            Card #1
+                        </span>
+                        <button class="button delete-card">X</button>
                     </li>
                     <li class="add-new">
                         <form class="new-card" action="index.html">
@@ -31,13 +35,17 @@
         <div class="column">
             <div class="list">
                 <div class="list-header">
-                    Doing
+                    <span>
+                        Doing
+                    </span>
                     <button class="button delete">X</button>
                 </div>
                 <ul class="list-cards">
                     <li class="card">
-                        Card #2
-                        <button class="button delete">X</button>
+                        <span class="number">
+                            Card #2
+                        </span>
+                        <button class="button delete-card">X</button>
                     </li>
                     <li class="add-new">
                         <form class="new-card" action="index.html">
@@ -51,16 +59,20 @@
         <div class="column">
             <div class="list">
                 <div class="list-header">
-                    Done
+                    <span>
+                        Done
+                    </span>
                     <button class="button delete">X</button>
                 </div>
                 <ul class="list-cards">
                     <li class="card">
-                        Card #3
-                        <button class="button delete">X</button>
+                        <span class="number">
+                            Card #3 
+                        </span>
+                        <button class="button delete-card">X</button>
                     </li>
                     <li class="add-new">
-                        <form class="new-card" action="index.html">
+                        <form class="new-card">
                             <input type="text" name="title" placeholder="Please name the card" />
                             <button class="button add">Add new card</button>
                         </form>
@@ -68,15 +80,49 @@
                 </ul>
             </div>
         </div>
-        <div class="column">
+
+        <div class="column" style="display:none;">
+                <div class="list">
+                    <div class="list-header">
+                        <span>
+                            Done
+                        </span>
+                        <button class="button delete">X</button>
+                    </div>
+                    <ul class="list-cards">
+                        <li class="card">
+                            <span class="number">
+                                Card #3 
+                            </span>
+                            <button class="button delete">X</button>
+                        </li>
+                        <li class="add-new">
+                            <form class="new-card">
+                                <input type="text" name="title" placeholder="Please name the card" />
+                                <button class="button add">Add new card</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        <div class="column columnList" style="width: 100px;">
+            <form id="list-creation-dialog" title="Create new list" style="height: 55px"> 
+                    <input type="text" name="title" placeholder="List title" />
+            </form>
             <button id="new-list" class="button">Add new list</button>
         </div>
     </div>
 
-    <div id="list-creation-dialog" title="Create new list" style="height: 40px">
-        <form> 
-            <input type="text" name="title" placeholder="List title" />
-        </form>
-    </div>
+    <!-- <div id="list-creation-dialog" title="Create new list" style="height: 40px">
+
+    </div> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
 </body>
 </html>

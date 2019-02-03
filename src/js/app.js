@@ -23,12 +23,14 @@ const jtrello = (function() {
     DOM.$columns = $('.column');
     DOM.$lists = $('.list');
     DOM.$cards = $('.card');
+    DOM.$listCards = $('ul.list-cards');
     
     DOM.$newListButton = $('button#new-list');
     DOM.$deleteListButton = $('.list-header > button.delete');
 
     DOM.$newCardForm = $('form.new-card');
-    DOM.$deleteCardButton = $('.card > button.delete');
+    DOM.$deleteCardButton = $('.delete-card');
+    DOM.$titleListInput = $('#list-creation-dialog > input');
   }
 
   function createTabs() {}
@@ -46,23 +48,65 @@ const jtrello = (function() {
     DOM.$deleteCardButton.on('click', deleteCard);
   }
 
+  function columnsCount() {
+    return $('.board').children('div').length;
+  }
+
+
+ 
+
   /* ============== Metoder för att hantera listor nedan ============== */
   function createList() {
     event.preventDefault();
-    console.log("This should create a new list");
-  }
 
-  function deleteList() {
+    let createdList = DOM.$columns.last().prev().clone();
+    createdList.show().fadeOut(1).slideToggle(700);
+    
+   
+    let titleListName = DOM.$titleListInput.val();
+    if (titleListName === "" || titleListName === null){ return alert("Enter a name for new list please!")}
+    createdList.find('.list-header > span').text(titleListName);
+    createdList.find('.list-header > button.delete').on('click', deleteList);
+    createdList.find('form.new-card').on('submit', createCard);
+    createdList.find('.delete-card').on('click', deleteCard);
+    
+    createdList.insertAfter(DOM.$board.find('.column').last().prev());
+    
+    // createdList.sortable();
+  }
+  
+
+
+  function deleteList(event) {
+    event.preventDefault();
+    if(columnsCount() > 2) {
+      $(this).closest('.column').remove().fadeIn(1).fadeToggle(600);} else {
+        $(this).closest('.column').hide().fadeIn(1).fadeToggle(600);
+      }
     console.log("This should delete the list you clicked on");
   }
+
 
   /* =========== Metoder för att hantera kort i listor nedan =========== */
   function createCard(event) {
     event.preventDefault();
-    console.log("This should create a new card");
+      
+  function listCount () {
+    return $('.column').find('ul.list-cards').children('li.card').length;
+  }
+    let newCard = $(this).closest('ul.list-cards').find('li.card').clone().last();
+    newCard.show();
+
+    let cardsName = $(this).find('input[name="title"]').val();
+    newCard.find('span.number').text(`No. ${listCount()} - ${cardsName}`);
+    
+    newCard.find('.delete-card').on('click', deleteCard);
+
+    newCard.insertAfter($(this).closest('ul.list-cards').find('li.card').last());
   }
 
   function deleteCard() {
+    $(this).closest('.card').remove();
     console.log("This should delete the card you clicked on");
   }
 
