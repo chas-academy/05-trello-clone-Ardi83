@@ -3,6 +3,36 @@ import $ from 'jquery';
 require('webpack-jquery-ui');
 import '../css/styles.css';
 
+
+//widget 
+$.widget('bg.randomizer', {
+  options: {
+    color:'black'
+  },
+  _create: function() {
+    this._refresh();
+  },
+  _refresh: function() {
+    $('#background').css('background-color', this.options.color)
+  },
+  change: function (value) {
+    this.options.color = {
+        red: Math.floor( Math.random() * 256 ),
+        green: Math.floor( Math.random() * 256 ),
+        blue: Math.floor( Math.random() * 256 )
+    };
+    this._refresh();
+  }
+});
+
+$('#background').randomizer();
+
+$('#background').on('click', '#bg-color', function() {
+  $('#background').randomizer('change');
+})
+
+
+
 /**
  * jtrello
  * @return {Object} [Publikt tillgänliga metoder som vi exponerar]
@@ -33,7 +63,10 @@ const jtrello = (function() {
     DOM.$titleListInput = $('#list-creation-dialog > input');
   }
   
-  function createTabs() {}
+  function createTabs() {
+      $( "#tabs" ).tabs();
+    
+  }
   function createDialogs() {}
 
   /*
@@ -108,30 +141,30 @@ sortera('.board');
   </li>`);
 
 //==== toggle form new card
-    $(newCard).click(function(event){
+    let clicable = $(newCard).find('span.numberr');
+    $(clicable).on('click', function(event){
       event.preventDefault();
-      let cardNumberr = $(this).find('span.numberr').text();
-      $('#toggle-time').find('#toggle-title-nu').append(cardNumberr);
-      $('#toggle-time').toggle();
+      let cardNumberr = $(newCard).find('span.numberr').text();
+      $('#tabs').find('#toggle-title-nu').append(cardNumberr);
+      $('#tabs').toggle().hide().fadeIn(500);
     });
     
-    newCard.find('.delete-card').on('click', deleteCard);
-    
+    newCard.find('.delete-card').on('click', deleteCard); 
     newCard.hide().appendTo($(this).closest('.list-cards')).slideDown(400);
     $('.list-cards').sortable({connectWith: ".list-cards"});
 }
 // ==== delete toggle form
-      $('#toggle-time').find('button.toggle-close').click(function(event){
+      $('#tabs').find('button.toggle-close').click(function(event){
         event.preventDefault();
-        $('#toggle-time').hide();
+        $('#tabs').hide().fadeIn(1).fadeOut(500);
         $("#toggle-title-nu").text("");
       })
 //==== toggle form default card
   $('li.card').click(function(){
     event.preventDefault();
     let cardNumber = $(this).find('span.number').text();
-    $('#toggle-time').find('#toggle-title-nu').append(cardNumber);
-    $('#toggle-time').toggle();
+    $('#tabs').find('#toggle-title-nu').append(cardNumber);
+    $('#tabs').toggle().hide().fadeIn(500);
 });
 
 // ==== delete card
@@ -155,6 +188,7 @@ sortera('.board');
     bindEvents();
   }
 
+  
   // All kod här
   return {
     init: init

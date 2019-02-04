@@ -6,7 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>jQuery UI - Trello Clone (yay!)</title>
 </head>
-<body>
+<body id="background">
+    <div>
+        <h1>Kanban board - Ardi</h1>
+    </div>
+        <button  id="bg-color" class="button">Change to Random Background-color</button>
     <div class="board">
         <div class="column">
             <div class="list">
@@ -114,15 +118,22 @@
             <button id="new-list" class="button">Add new list</button>
         </div>
     </div>
-<div id="toggle-time">
-    <button class="toggle-close toggle-button">X</button> 
-    <form id="toggle-form"> 
-        <label class="toggle-label" for="description">Task Description for <span id="toggle-title-nu"></span></label>
-        <input type="text">
-        <label class="toggle-label" for="time">How much time need for the task</label>
-        <input type="time" />   
-        <button class="toggle-button">Save</button>
-    </form>
+<div id="tabs">
+    <div>
+        <span id="toggle-title-nu"></span>
+        <button class="toggle-close toggle-button">X</button> 
+        <button class="toggle-save toggle-button">Save</button> 
+    </div>
+    <ul class="tabs-list">
+        <li><a href="#tabs-1" style="cursor: pointer;">Task</a></li>
+        <li><a href="#tabs-2">Time</a></li>
+    </ul>
+    <div id="tabs-1">
+            <input type="text" placeholder="Enter your task desciption">
+    </div>
+    <div id="tabs-2">
+        <input type="time" placeholder="How much time do you need" /> 
+    </div>
 </div>
  
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
