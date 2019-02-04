@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>jQuery UI - Trello Clone (yay!)</title>
-<link href="./css/index.00ce6e7da9a6f5c3411b.css" rel="stylesheet"></head>
+<link href="./css/index.85818c57e247b936527b.css" rel="stylesheet"></head>
 <body>
     <div class="board">
         <div class="column">
@@ -19,7 +19,7 @@
                 <ul class="list-cards">
                     <li class="card">
                         <span class="number">
-                            Card #1
+                            No. 1 
                         </span>
                         <button class="button delete-card">X</button>
                     </li>
@@ -43,7 +43,7 @@
                 <ul class="list-cards">
                     <li class="card">
                         <span class="number">
-                            Card #2
+                            No. 2 
                         </span>
                         <button class="button delete-card">X</button>
                     </li>
@@ -67,7 +67,7 @@
                 <ul class="list-cards">
                     <li class="card">
                         <span class="number">
-                            Card #3 
+                            No. 3 
                         </span>
                         <button class="button delete-card">X</button>
                     </li>
@@ -92,7 +92,7 @@
                     <ul class="list-cards">
                         <li class="card">
                             <span class="number">
-                                Card #3 
+                                No. 3  
                             </span>
                             <button class="button delete">X</button>
                         </li>
@@ -114,10 +114,17 @@
             <button id="new-list" class="button">Add new list</button>
         </div>
     </div>
-
-    <!-- <div id="list-creation-dialog" title="Create new list" style="height: 40px">
-
-    </div> -->
+<div id="toggle-time">
+    <button class="toggle-close toggle-button">X</button> 
+    <form id="toggle-form"> 
+        <label class="toggle-label" for="description">Task Description for <span id="toggle-title-nu"></span></label>
+        <input type="text">
+        <label class="toggle-label" for="time">How much time need for the task</label>
+        <input type="time" />   
+        <button class="toggle-button">Save</button>
+    </form>
+</div>
+ 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>

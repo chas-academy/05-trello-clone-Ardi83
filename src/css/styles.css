@@ -208,3 +208,24 @@ button#new-list:hover {
 	border: 1px solid #172c55b9; 
 	color: white;
 }
+#toggle-time{
+  display:none;
+  position: absolute;
+  z-index: 99; 
+  height: 21%;
+  background-color: rgb(36, 42, 51); 
+  padding: 10px;
+  margin:auto;
+  right:40%; 
+  left:40%; 
+  top: 40%; 
+  bottom:40%;
+  border-radius: 5px;
+}
+.toggle-button{
+  float: right;
+  margin-bottom: 4px;
+}
+.toggle-label{
+  color: wheat !important;
+}

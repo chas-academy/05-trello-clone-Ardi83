@@ -32,7 +32,7 @@ const jtrello = (function() {
     DOM.$deleteCardButton = $('.delete-card');
     DOM.$titleListInput = $('#list-creation-dialog > input');
   }
-
+  
   function createTabs() {}
   function createDialogs() {}
 
@@ -101,17 +101,42 @@ sortera('.board');
   
   let cardsName = $(this).find('input[name="title"]').val();
   let newCard = $(`
-  <li class="card"> <span class="number"> No. ${listCount()} - ${cardsName} </span>
+  <li class="card"> <span class="numberr">
+  <span style="background-color:lightblue; padding:2px;">
+   No. ${listCount()} </span> - ${cardsName} </span>
   <button class="button delete-card">X</button>
   </li>`);
 
-  newCard.find('.delete-card').on('click', deleteCard);
-  newCard.appendTo($(this).closest('.list-cards'));
-  $('.list-cards').sortable({connectWith: ".list-cards"});
-  }
+//==== toggle form new card
+    $(newCard).click(function(event){
+      event.preventDefault();
+      let cardNumberr = $(this).find('span.numberr').text();
+      $('#toggle-time').find('#toggle-title-nu').append(cardNumberr);
+      $('#toggle-time').toggle();
+    });
+    
+    newCard.find('.delete-card').on('click', deleteCard);
+    
+    newCard.hide().appendTo($(this).closest('.list-cards')).slideDown(400);
+    $('.list-cards').sortable({connectWith: ".list-cards"});
+}
+// ==== delete toggle form
+      $('#toggle-time').find('button.toggle-close').click(function(event){
+        event.preventDefault();
+        $('#toggle-time').hide();
+        $("#toggle-title-nu").text("");
+      })
+//==== toggle form default card
+  $('li.card').click(function(){
+    event.preventDefault();
+    let cardNumber = $(this).find('span.number').text();
+    $('#toggle-time').find('#toggle-title-nu').append(cardNumber);
+    $('#toggle-time').toggle();
+});
 
+// ==== delete card
   function deleteCard() {
-    $(this).closest('.card').hide().fadeIn(1).fadeOut(1000).remove();
+    $(this).closest('.card').slideToggle(400,function() {$(this).closest('.card').remove()});
   }
 
   // Metod för att rita ut element i DOM:en
