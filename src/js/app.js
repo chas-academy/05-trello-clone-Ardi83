@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-// require('webpack-jquery-ui');
+require('webpack-jquery-ui');
 import '../css/styles.css';
 
 /**
@@ -52,9 +52,14 @@ const jtrello = (function() {
     return $('.board').children('div').length;
   }
 
-
+  function sortera(name) {
+    $(name).sortable({
+      tolerance: 'pointer', cursor: 'pointer', revert: true, opacity: 0.60, 
+      items: '> div:not(.columnList)'
+  })
+}
+sortera('.board');
  
-
   /* ============== Metoder för att hantera listor nedan ============== */
   function createList() {
     event.preventDefault();
@@ -71,8 +76,7 @@ const jtrello = (function() {
     createdList.find('.card').remove();
     
     createdList.insertAfter(DOM.$board.find('.column').last().prev());
-    
-    // createdList.sortable();
+    sortera('.board');
   }
   
 
@@ -96,20 +100,18 @@ const jtrello = (function() {
   }
   
   let cardsName = $(this).find('input[name="title"]').val();
-  let newCard = $(`<ul class="list-cards">
+  let newCard = $(`
   <li class="card"> <span class="number"> No. ${listCount()} - ${cardsName} </span>
   <button class="button delete-card">X</button>
-  </li></ul>`);
-  
+  </li>`);
 
-    newCard.find('.delete-card').on('click', deleteCard);
-    // newCard.find('.button.delete').on('click', deleteCard);
-    newCard.appendTo($(this).closest('.list-cards'));
+  newCard.find('.delete-card').on('click', deleteCard);
+  newCard.appendTo($(this).closest('.list-cards'));
+  $('.list-cards').sortable({connectWith: ".list-cards"});
   }
 
   function deleteCard() {
     $(this).closest('.card').hide().fadeIn(1).fadeOut(1000).remove();
-    console.log("This should delete the card you clicked on");
   }
 
   // Metod för att rita ut element i DOM:en
